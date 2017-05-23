@@ -4,6 +4,7 @@
 from datetime import datetime
 # convert times according to time zones
 from pytz import timezone
+from requests import get
 
 def reply(tweet):
     """Return text to be used as a reply"""
@@ -32,6 +33,11 @@ def idle_text():
         text = "Das elektrische Feld beschreibt einen Raumzustand um eine Punktladung Q"
     elif i < 0.6:
         text = "The mitochondria is the powerhouse of the cell."
-    else:
+    elif i < 0.7:
         text = "*insert creative text*"
+    else:
+      # Some more ideas: https://www.programmableweb.com/category/humor/api
+      data = get('https://api.chucknorris.io/jokes/random').json()
+      joke = data['value']
+      text = joke[0:139]
     return text
